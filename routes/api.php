@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Product\ProductController;
+use App\Http\Controllers\Api\SaleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('products', [ProductController::class, 'index']);
+Route::prefix('products')->group(base_path('routes/products/index.php'));
+Route::prefix('sales')->group(base_path('routes/sales/index.php'));

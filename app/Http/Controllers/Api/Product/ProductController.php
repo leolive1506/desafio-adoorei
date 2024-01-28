@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Product;
 
+use App\Enums\Messages\Message;
 use App\Http\Controllers\Controller;
 use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
-use App\Enums\Messages\Http\Response as MessagesResponse;
-use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductCollection;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
@@ -23,9 +23,9 @@ class ProductController extends Controller
         $products = $this->service->all($request);
 
         return $this->success(
-            MessagesResponse::OK,
+            Message::OK,
             Response::HTTP_OK,
-            new ProductResource($products)
+            (new ProductCollection($products))->response()->getData(true)
         );
     }
 }
